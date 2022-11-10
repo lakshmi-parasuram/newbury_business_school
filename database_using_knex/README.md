@@ -31,3 +31,15 @@ To seed the data
 ```
 $ npm run seed
 ```
+
+To do further changes, to add a new table use knex migration
+
+```
+$ knex migrate:make migration_name
+```
+
+To cleanup and start over
+
+```
+$ knex migrate:rollback
+```
