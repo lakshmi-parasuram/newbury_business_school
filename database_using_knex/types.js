@@ -10,4 +10,6 @@ exports.tables = {
   enrollments: "enrollments",
   learning_resources: "learning_resources",
   learning_resource_types: "learning_resource_types",
+  classes: "classes",
+  learning_activites: "learning_activities",
 };
