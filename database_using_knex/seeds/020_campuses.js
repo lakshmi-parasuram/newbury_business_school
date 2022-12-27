@@ -1,11 +1,13 @@
+const types = require("../types");
+const tables = types.tables;
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
-  await knex("campuses").del();
-  await knex("campuses").insert([
+  await knex(tables.campuses).del();
+  await knex(tables.campuses).insert([
     { id: 1, name: "London" },
     { id: 2, name: "Hongkong" },
     { id: 3, name: "Paris" },
