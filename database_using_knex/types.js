@@ -4,4 +4,5 @@ exports.tables = {
   campuses: "campuses",
   learning_styles: "learning_styles",
   tutors: "tutors",
+  managers: "managers",
 };

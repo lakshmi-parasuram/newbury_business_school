@@ -6,15 +6,10 @@ const tables = types.tables;
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-  return knex.schema.createTable(tables.tutors, function (table) {
+  return knex.schema.createTable(tables.managers, function (table) {
     table.increments();
     table.string("name").notNullable();
-    table.string("salary").notNullable();
-    table.string("type").notNullable();
     table.string("email").notNullable();
-    table.integer("manager_id").unsigned().notNullable();
-
-    table.foreign("manager_id").references("id").inTable(tables.managers);
   });
 };
 
@@ -23,6 +18,6 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-  return knex.schema.dropTable(tables.tutors);
+  return knex.schema.dropTable(tables.managers);
 };
 // name, salary, type, email address and qualifications
