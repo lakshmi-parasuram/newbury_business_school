@@ -6,11 +6,12 @@ const tables = types.tables;
  */
 exports.seed = async function (knex) {
   // Deletes ALL existing entries
-  await knex(tables.languages).del();
-  await knex(tables.languages).insert([
-    { id: 1, name: "English" },
-    { id: 2, name: "German" },
-    { id: 3, name: "French" },
-    { id: 4, name: "Spanish" },
+  await knex(tables.learning_styles).del();
+  await knex(tables.learning_styles).insert([
+    {
+      id: 1,
+      name: "Full time",
+    },
+    { id: 2, name: "Part time" },
   ]);
 };
