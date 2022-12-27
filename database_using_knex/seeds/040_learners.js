@@ -15,7 +15,6 @@ exports.seed = async function (knex) {
       email: "gene.mallin@student.com",
       age: "23",
       gender: "Male",
-      learning_style_id: 1,
       phone_number: "0123456789",
     },
     {
@@ -25,7 +24,6 @@ exports.seed = async function (knex) {
       email: "doran.schultz@student.com",
       age: "25",
       gender: "Male",
-      learning_style_id: 1,
       phone_number: "0456789123",
     },
     {
@@ -35,7 +33,6 @@ exports.seed = async function (knex) {
       email: "molly.mccarthy@student.com",
       age: "22",
       gender: "Female",
-      learning_style_id: 1,
       phone_number: "0789123456",
     },
     {
@@ -45,7 +42,6 @@ exports.seed = async function (knex) {
       email: "madison.marrow@student.com",
       age: "26",
       gender: "Female",
-      learning_style_id: 2,
       phone_number: "0723456891",
     },
     {
@@ -55,7 +51,6 @@ exports.seed = async function (knex) {
       email: "austin.lee@student.com",
       age: "28",
       gender: "Male",
-      learning_style_id: 2,
       phone_number: "0456891723",
     },
   ]);

@@ -13,12 +13,6 @@ exports.up = function (knex) {
     table.string("age").notNullable();
     table.string("gender").notNullable();
     table.string("phone_number").notNullable();
-    table.integer("learning_style_id").unsigned().notNullable();
-
-    table
-      .foreign("learning_style_id")
-      .references("id")
-      .inTable(tables.learning_styles);
   });
 };
 
