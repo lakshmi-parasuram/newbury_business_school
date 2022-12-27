@@ -1,11 +1,27 @@
+const types = require("../types");
+const tables = types.tables;
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
 exports.up = function (knex) {
-    return knex.schema.createTable("learning_resources", function (table) {
-        table.increments();
-    });
+  return knex.schema.createTable(tables.learning_resources, function (table) {
+    table.increments();
+    table.integer("language_id").unsigned().notNullable();
+
+    table.foreign("language_id").references("id").inTable(tables.languages);
+
+    table.integer("learning_resource_type_id").unsigned().notNullable();
+
+    table
+      .foreign("learning_resource_type_id")
+      .references("id")
+      .inTable(tables.learning_resource_types);
+
+    table.string("duration");
+    table.string("author");
+    table.date("date_of_issue");
+  });
 };
 
 /**
@@ -13,5 +29,5 @@ exports.up = function (knex) {
  * @returns { Promise<void> }
  */
 exports.down = function (knex) {
-    return knex.schema.dropTable("learning_resources");
+  return knex.schema.dropTable(tables.learning_resources);
 };
