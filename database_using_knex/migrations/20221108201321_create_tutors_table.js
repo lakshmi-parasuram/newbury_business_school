@@ -12,6 +12,10 @@ exports.up = function (knex) {
     table.string("salary").notNullable();
     table.string("type").notNullable();
     table.string("email").notNullable();
+    table.integer("tutor_leader_id").unsigned();
+
+    table.foreign("tutor_leader_id").references("id").inTable(tables.tutors);
+
     table.integer("manager_id").unsigned().notNullable();
 
     table.foreign("manager_id").references("id").inTable(tables.managers);

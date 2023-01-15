@@ -22,6 +22,7 @@ exports.seed = async function (knex) {
       salary: "3200",
       type: "Permanent",
       email: "walter.wallace@newbury-business-school.com",
+      tutor_leader_id: 1,
       manager_id: 1,
     },
     {
@@ -38,6 +39,7 @@ exports.seed = async function (knex) {
       salary: "3100",
       type: "Permanent",
       email: "lola.watts@newbury-business-school.com",
+      tutor_leader_id: 1,
       manager_id: 3,
     },
     {
