@@ -1,0 +1,28 @@
+For each point, write down how it can fit in the given requirements.
+
+1. Each learning resource has one learning resource type 
+    1. It can help accommodate extending and adding new resource types with out affecting learning resources data
+2. Each learning resource has many learning activities relationship
+    1. This helps us to implement the given requirement 
+    2. It can help accommodate extending and adding new learning activity with out affecting learning resources data
+3. Each language has Many learning resources
+    1. It can help accommodate extending and adding new learning resource with out affecting languages data
+    2. By decoupling languages and learning resources data, we can add or update the languages data with out affecting learning resources as well.
+4. Each campus many optional enrolments
+    1. With this we can add or update campuses information and can add new enrolments without effecting each table data
+    2. Campuses can exist with out enrolments
+5. Each language can have many enrolments and Each enrolment belongs to a Language
+    1. Languages can exist without having enrolments but an enrolment requires to contain Language information.
+6. Each enrolment has a learning style
+    1. With this we can add or update learning styles independent of enrollment data.
+7. Each learner has many optional enrolments, and each enrolment belongs to a learner.
+    1. With this we can provide option for learners to enrol for as many languages as they want
+    2. By making the relationship optional, Learners can exist in the system with out enrolment data also.
+8. Classes and learners are bound by Many to Many relationship with learners_classes table
+    1. Learners can have many classes to attend
+    2. Each class can have many learners
+9. Each class is taught by a tutor and optionally tutor can taught many classes.
+    1. By making the relationship optional, tutors can exist in the system with out classes data also.
+10. Each class belong to a Semester and Each semester can have Many classes
+11. Each tutor has an optional tutor leader with a self to different column in the same table
+12. Each tutor can have an optional Manager and Each manager optionally can manage multiple tutors
