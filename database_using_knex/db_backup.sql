@@ -124,7 +124,7 @@ CREATE TABLE `knex_migrations` (
   `batch` int DEFAULT NULL,
   `migration_time` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +133,7 @@ CREATE TABLE `knex_migrations` (
 
 LOCK TABLES `knex_migrations` WRITE;
 /*!40000 ALTER TABLE `knex_migrations` DISABLE KEYS */;
-INSERT INTO `knex_migrations` VALUES (1,'20221108195859_create_languages_table.js',1,'2023-01-15 14:13:19'),(2,'20221108200108_create_campuses_table.js',1,'2023-01-15 14:13:19'),(3,'20221108200208_create_semesters_table.js',1,'2023-01-15 14:13:19'),(4,'20221108200348_create_learning_styles_table.js',1,'2023-01-15 14:13:19'),(5,'20221108200548_create_learners_table.js',1,'2023-01-15 14:13:19'),(6,'20221108201221_create_managers_table.js',1,'2023-01-15 14:13:19'),(7,'20221108201321_create_tutors_table.js',1,'2023-01-15 14:13:19'),(8,'20221108201421_create_tutor_qualifications_table.js',1,'2023-01-15 14:13:19'),(9,'20221108201615_create_classes_table.js',1,'2023-01-15 14:13:19'),(10,'20221108202155_create_learning_resource_types_table.js',1,'2023-01-15 14:13:19'),(11,'20221110182658_create_enrollments_table.js',1,'2023-01-15 14:13:20'),(12,'20221110182752_create_learning_resources_table.js',1,'2023-01-15 14:13:20'),(13,'20221110182808_create_learning_activities_table.js',1,'2023-01-15 14:13:20');
+INSERT INTO `knex_migrations` VALUES (1,'20221108195859_create_languages_table.js',1,'2023-01-16 03:08:13'),(2,'20221108200108_create_campuses_table.js',1,'2023-01-16 03:08:13'),(3,'20221108200208_create_semesters_table.js',1,'2023-01-16 03:08:13'),(4,'20221108200348_create_learning_styles_table.js',1,'2023-01-16 03:08:13'),(5,'20221108200548_create_learners_table.js',1,'2023-01-16 03:08:13'),(6,'20221108201221_create_managers_table.js',1,'2023-01-16 03:08:13'),(7,'20221108201321_create_tutors_table.js',1,'2023-01-16 03:08:13'),(8,'20221108201421_create_tutor_qualifications_table.js',1,'2023-01-16 03:08:13'),(9,'20221108201615_create_classes_table.js',1,'2023-01-16 03:08:13'),(10,'20221108202155_create_learning_resource_types_table.js',1,'2023-01-16 03:08:13'),(11,'20221110182658_create_enrollments_table.js',1,'2023-01-16 03:08:13'),(12,'20221110182752_create_learning_resources_table.js',1,'2023-01-16 03:08:13'),(13,'20221110182808_create_learning_activities_table.js',1,'2023-01-16 03:08:13'),(14,'20221110183808_create_learners_classes_table.js',1,'2023-01-16 03:08:13');
 /*!40000 ALTER TABLE `knex_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -170,7 +170,7 @@ DROP TABLE IF EXISTS `languages`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `languages` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -215,6 +215,35 @@ INSERT INTO `learners` VALUES (1,'Gene','Mallin','gene.mallin@student.com','23',
 UNLOCK TABLES;
 
 --
+-- Table structure for table `learners_classes`
+--
+
+DROP TABLE IF EXISTS `learners_classes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `learners_classes` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `learner_id` int unsigned NOT NULL,
+  `class_id` int unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `learners_classes_learner_id_foreign` (`learner_id`),
+  KEY `learners_classes_class_id_foreign` (`class_id`),
+  CONSTRAINT `learners_classes_class_id_foreign` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`),
+  CONSTRAINT `learners_classes_learner_id_foreign` FOREIGN KEY (`learner_id`) REFERENCES `learners` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `learners_classes`
+--
+
+LOCK TABLES `learners_classes` WRITE;
+/*!40000 ALTER TABLE `learners_classes` DISABLE KEYS */;
+INSERT INTO `learners_classes` VALUES (1,1,1),(2,1,2),(3,2,1),(4,2,2),(5,2,3),(6,1,3),(7,4,1);
+/*!40000 ALTER TABLE `learners_classes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `learning_activities`
 --
 
@@ -224,7 +253,7 @@ DROP TABLE IF EXISTS `learning_activities`;
 CREATE TABLE `learning_activities` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `issue_date` date NOT NULL,
-  `author` varchar(255) NOT NULL,
+  `author` varchar(64) NOT NULL,
   `marks` float(8,2) NOT NULL,
   `learning_resource_id` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
@@ -252,7 +281,7 @@ DROP TABLE IF EXISTS `learning_resource_types`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `learning_resource_types` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -278,9 +307,9 @@ CREATE TABLE `learning_resources` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `language_id` int unsigned NOT NULL,
   `learning_resource_type_id` int unsigned NOT NULL,
-  `duration` varchar(255) DEFAULT NULL,
-  `author` varchar(255) DEFAULT NULL,
-  `date_of_issue` date DEFAULT NULL,
+  `duration` varchar(32) NOT NULL,
+  `author` varchar(64) NOT NULL,
+  `date_of_issue` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `learning_resources_language_id_foreign` (`language_id`),
   KEY `learning_resources_learning_resource_type_id_foreign` (`learning_resource_type_id`),
@@ -443,4 +472,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-15 14:13:26
+-- Dump completed on 2023-01-16  3:08:19

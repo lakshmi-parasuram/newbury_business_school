@@ -18,9 +18,9 @@ exports.up = function (knex) {
       .references("id")
       .inTable(tables.learning_resource_types);
 
-    table.string("duration");
-    table.string("author");
-    table.date("date_of_issue");
+    table.string("duration", 32).notNullable();
+    table.string("author", 64).notNullable();
+    table.date("date_of_issue").notNullable();
   });
 };
 

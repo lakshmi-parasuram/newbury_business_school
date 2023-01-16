@@ -12,4 +12,5 @@ exports.tables = {
   learning_resource_types: "learning_resource_types",
   classes: "classes",
   learning_activites: "learning_activities",
+  learners_classes: "learners_classes",
 };

@@ -8,7 +8,7 @@ exports.up = function (knex) {
   return knex.schema.createTable(tables.learning_activites, function (table) {
     table.increments();
     table.date("issue_date").notNullable();
-    table.string("author").notNullable();
+    table.string("author", 64).notNullable();
     table.float("marks").notNullable();
     table.integer("learning_resource_id").unsigned().notNullable();
 

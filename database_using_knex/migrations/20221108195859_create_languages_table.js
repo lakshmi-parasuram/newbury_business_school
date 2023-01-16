@@ -7,7 +7,7 @@ const tables = types.tables;
 exports.up = function (knex) {
   return knex.schema.createTable(tables.languages, function (table) {
     table.increments();
-    table.string("name").notNullable();
+    table.string("name", 32).notNullable();
   });
 };
 
