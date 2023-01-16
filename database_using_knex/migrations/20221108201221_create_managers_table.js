@@ -8,8 +8,8 @@ const tables = types.tables;
 exports.up = function (knex) {
   return knex.schema.createTable(tables.managers, function (table) {
     table.increments();
-    table.string("name").notNullable();
-    table.string("email").notNullable();
+    table.string("name", 32).notNullable();
+    table.string("email", 64).notNullable();
   });
 };
 

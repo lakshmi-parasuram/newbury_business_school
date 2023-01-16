@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `campuses`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `campuses` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -48,11 +48,11 @@ DROP TABLE IF EXISTS `classes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `classes` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `tutor_id` int unsigned NOT NULL,
-  `delivery_style` varchar(255) NOT NULL,
+  `delivery_style` varchar(16) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `size` int NOT NULL,
+  `tutor_id` int unsigned NOT NULL,
   `semester_id` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `classes_tutor_id_foreign` (`tutor_id`),
@@ -68,7 +68,7 @@ CREATE TABLE `classes` (
 
 LOCK TABLES `classes` WRITE;
 /*!40000 ALTER TABLE `classes` DISABLE KEYS */;
-INSERT INTO `classes` VALUES (1,1,'online','2022-12-22','2022-12-22',7,1),(2,1,'in campus','2022-12-20','2022-12-20',10,1),(3,2,'online','2023-02-20','2023-02-20',6,2),(4,3,'in campus','2023-03-20','2023-03-20',9,3),(5,4,'in campus','2023-05-10','2023-05-10',9,4);
+INSERT INTO `classes` VALUES (1,'online','2022-12-22','2022-12-22',7,1,1),(2,'in campus','2022-12-20','2022-12-20',10,1,1),(3,'online','2023-02-20','2023-02-20',6,2,2),(4,'in campus','2023-03-20','2023-03-20',9,3,3),(5,'in campus','2023-05-10','2023-05-10',9,4,4);
 /*!40000 ALTER TABLE `classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,13 +82,13 @@ DROP TABLE IF EXISTS `enrollments`;
 CREATE TABLE `enrollments` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `learner_id` int unsigned NOT NULL,
-  `course_duration` varchar(255) NOT NULL,
-  `fees` varchar(255) NOT NULL,
+  `course_duration` varchar(64) NOT NULL,
+  `fees` varchar(16) NOT NULL,
   `learner_address` varchar(255) NOT NULL,
   `campus_id` int unsigned NOT NULL,
   `language_id` int unsigned NOT NULL,
   `learning_style_id` int unsigned NOT NULL,
-  `learning_model` varchar(255) DEFAULT NULL,
+  `learning_model` varchar(16) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `enrollments_learner_id_foreign` (`learner_id`),
   KEY `enrollments_campus_id_foreign` (`campus_id`),
@@ -133,7 +133,7 @@ CREATE TABLE `knex_migrations` (
 
 LOCK TABLES `knex_migrations` WRITE;
 /*!40000 ALTER TABLE `knex_migrations` DISABLE KEYS */;
-INSERT INTO `knex_migrations` VALUES (1,'20221108195859_create_languages_table.js',1,'2023-01-16 03:08:13'),(2,'20221108200108_create_campuses_table.js',1,'2023-01-16 03:08:13'),(3,'20221108200208_create_semesters_table.js',1,'2023-01-16 03:08:13'),(4,'20221108200348_create_learning_styles_table.js',1,'2023-01-16 03:08:13'),(5,'20221108200548_create_learners_table.js',1,'2023-01-16 03:08:13'),(6,'20221108201221_create_managers_table.js',1,'2023-01-16 03:08:13'),(7,'20221108201321_create_tutors_table.js',1,'2023-01-16 03:08:13'),(8,'20221108201421_create_tutor_qualifications_table.js',1,'2023-01-16 03:08:13'),(9,'20221108201615_create_classes_table.js',1,'2023-01-16 03:08:13'),(10,'20221108202155_create_learning_resource_types_table.js',1,'2023-01-16 03:08:13'),(11,'20221110182658_create_enrollments_table.js',1,'2023-01-16 03:08:13'),(12,'20221110182752_create_learning_resources_table.js',1,'2023-01-16 03:08:13'),(13,'20221110182808_create_learning_activities_table.js',1,'2023-01-16 03:08:13'),(14,'20221110183808_create_learners_classes_table.js',1,'2023-01-16 03:08:13');
+INSERT INTO `knex_migrations` VALUES (1,'20221108195859_create_languages_table.js',1,'2023-01-16 04:56:23'),(2,'20221108200108_create_campuses_table.js',1,'2023-01-16 04:56:23'),(3,'20221108200208_create_semesters_table.js',1,'2023-01-16 04:56:23'),(4,'20221108200348_create_learning_styles_table.js',1,'2023-01-16 04:56:23'),(5,'20221108200548_create_learners_table.js',1,'2023-01-16 04:56:23'),(6,'20221108201221_create_managers_table.js',1,'2023-01-16 04:56:23'),(7,'20221108201321_create_tutors_table.js',1,'2023-01-16 04:56:23'),(8,'20221108201421_create_tutor_qualifications_table.js',1,'2023-01-16 04:56:23'),(9,'20221108201615_create_classes_table.js',1,'2023-01-16 04:56:23'),(10,'20221108202155_create_learning_resource_types_table.js',1,'2023-01-16 04:56:23'),(11,'20221110182658_create_enrollments_table.js',1,'2023-01-16 04:56:23'),(12,'20221110182752_create_learning_resources_table.js',1,'2023-01-16 04:56:23'),(13,'20221110182808_create_learning_activities_table.js',1,'2023-01-16 04:56:24'),(14,'20221110183808_create_learners_classes_table.js',1,'2023-01-16 04:56:24');
 /*!40000 ALTER TABLE `knex_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,12 +194,12 @@ DROP TABLE IF EXISTS `learners`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `learners` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `age` varchar(255) NOT NULL,
-  `gender` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL,
+  `first_name` varchar(64) NOT NULL,
+  `last_name` varchar(64) NOT NULL,
+  `email` varchar(128) NOT NULL,
+  `age` int NOT NULL,
+  `gender` varchar(16) NOT NULL,
+  `phone_number` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -210,7 +210,7 @@ CREATE TABLE `learners` (
 
 LOCK TABLES `learners` WRITE;
 /*!40000 ALTER TABLE `learners` DISABLE KEYS */;
-INSERT INTO `learners` VALUES (1,'Gene','Mallin','gene.mallin@student.com','23','Male','0123456789'),(2,'Doran','Schultz','doran.schultz@student.com','25','Male','0456789123'),(3,'Molly','Mccarthy','molly.mccarthy@student.com','22','Female','0789123456'),(4,'Madison','Marrow','madison.marrow@student.com','26','Female','0723456891'),(5,'Austin','Lee','austin.lee@student.com','28','Male','0456891723');
+INSERT INTO `learners` VALUES (1,'Gene','Mallin','gene.mallin@student.com',23,'Male','0123456789'),(2,'Doran','Schultz','doran.schultz@student.com',25,'Male','0456789123'),(3,'Molly','Mccarthy','molly.mccarthy@student.com',22,'Female','0789123456'),(4,'Madison','Marrow','madison.marrow@student.com',26,'Female','0723456891'),(5,'Austin','Lee','austin.lee@student.com',28,'Male','0456891723');
 /*!40000 ALTER TABLE `learners` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -361,8 +361,8 @@ DROP TABLE IF EXISTS `managers`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `managers` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `email` varchar(64) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -386,9 +386,9 @@ DROP TABLE IF EXISTS `semesters`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `semesters` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `code` varchar(255) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `type` varchar(16) NOT NULL,
+  `code` varchar(8) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -439,10 +439,10 @@ DROP TABLE IF EXISTS `tutors`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tutors` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `salary` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `name` varchar(32) NOT NULL,
+  `salary` float(8,2) NOT NULL,
+  `type` varchar(16) NOT NULL,
+  `email` varchar(64) NOT NULL,
   `tutor_leader_id` int unsigned DEFAULT NULL,
   `manager_id` int unsigned NOT NULL,
   PRIMARY KEY (`id`),
@@ -459,7 +459,7 @@ CREATE TABLE `tutors` (
 
 LOCK TABLES `tutors` WRITE;
 /*!40000 ALTER TABLE `tutors` DISABLE KEYS */;
-INSERT INTO `tutors` VALUES (1,'Lilah Hunt','3000','Permanent','lilah.hunt@newbury-business-school.com',NULL,1),(2,'Walter Wallace','3200','Permanent','walter.wallace@newbury-business-school.com',1,1),(3,'Connor Nicholson','3800','Contract','connor.nicholson@newbury-business-school.com',NULL,2),(4,'Lola Watts','3100','Permanent','lola.watts@newbury-business-school.com',1,3),(5,'Annie Sutton','3000','Contract','annie.sutton@newbury-business-school.com',NULL,3),(6,'Lila Pearson','3100','Permanent','lila.pearson@newbury-business-school.com',NULL,4),(7,'Thalia Hunt','3000','Permanent','thalia.hunt@newbury-business-school.com',NULL,5);
+INSERT INTO `tutors` VALUES (1,'Lilah Hunt',3000.00,'Permanent','lilah.hunt@newbury-business-school.com',NULL,1),(2,'Walter Wallace',3200.00,'Permanent','walter.wallace@newbury-business-school.com',1,1),(3,'Connor Nicholson',3800.00,'Contract','connor.nicholson@newbury-business-school.com',NULL,2),(4,'Lola Watts',3100.00,'Permanent','lola.watts@newbury-business-school.com',1,3),(5,'Annie Sutton',3000.00,'Contract','annie.sutton@newbury-business-school.com',NULL,3),(6,'Lila Pearson',3100.00,'Permanent','lila.pearson@newbury-business-school.com',NULL,4),(7,'Thalia Hunt',3000.00,'Permanent','thalia.hunt@newbury-business-school.com',NULL,5);
 /*!40000 ALTER TABLE `tutors` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -472,4 +472,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-01-16  3:08:19
+-- Dump completed on 2023-01-16  4:56:29

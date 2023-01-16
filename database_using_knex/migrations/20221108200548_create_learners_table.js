@@ -7,12 +7,12 @@ const tables = types.tables;
 exports.up = function (knex) {
   return knex.schema.createTable(tables.learners, function (table) {
     table.increments();
-    table.string("first_name").notNullable();
-    table.string("last_name").notNullable();
-    table.string("email").notNullable();
-    table.string("age").notNullable();
-    table.string("gender").notNullable();
-    table.string("phone_number").notNullable();
+    table.string("first_name", 64).notNullable();
+    table.string("last_name", 64).notNullable();
+    table.string("email", 128).notNullable();
+    table.integer("age").notNullable();
+    table.string("gender", 16).notNullable();
+    table.string("phone_number", 32).notNullable();
   });
 };
 

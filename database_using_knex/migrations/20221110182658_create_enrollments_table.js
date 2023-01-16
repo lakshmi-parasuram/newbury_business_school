@@ -10,9 +10,9 @@ exports.up = function (knex) {
     table.integer("learner_id").unsigned().notNullable();
 
     table.foreign("learner_id").references("id").inTable(tables.learners);
-    table.string("course_duration").notNullable();
-    table.string("fees").notNullable();
-    table.string("learner_address").notNullable();
+    table.string("course_duration", 64).notNullable();
+    table.string("fees", 16).notNullable();
+    table.string("learner_address", 255).notNullable();
 
     table.integer("campus_id").unsigned().notNullable();
 
@@ -29,7 +29,7 @@ exports.up = function (knex) {
       .references("id")
       .inTable(tables.learning_styles);
 
-    table.string("learning_model");
+    table.string("learning_model", 16).notNullable();
   });
 };
 

@@ -8,10 +8,10 @@ const tables = types.tables;
 exports.up = function (knex) {
   return knex.schema.createTable(tables.tutors, function (table) {
     table.increments();
-    table.string("name").notNullable();
-    table.string("salary").notNullable();
-    table.string("type").notNullable();
-    table.string("email").notNullable();
+    table.string("name", 32).notNullable();
+    table.float("salary").notNullable();
+    table.string("type", 16).notNullable();
+    table.string("email", 64).notNullable();
     table.integer("tutor_leader_id").unsigned();
 
     table.foreign("tutor_leader_id").references("id").inTable(tables.tutors);

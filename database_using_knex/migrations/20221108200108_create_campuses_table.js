@@ -7,7 +7,7 @@ const tables = types.tables;
 exports.up = function (knex) {
   return knex.schema.createTable(tables.campuses, function (table) {
     table.increments();
-    table.string("name").notNullable();
+    table.string("name", 64).notNullable();
   });
 };
 
